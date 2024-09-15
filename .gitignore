@@ -43,3 +43,6 @@ app.*.map.json
 /android/app/release
 
 lib/main.dart
+ios/Runner/GoogleService-Info.plist
+android/app/google-services.json
+
