@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "862653316849",
+    "project_id": "fir-crud-flutter-cfc53",
+    "storage_bucket": "fir-crud-flutter-cfc53.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862653316849:android:53821afb8b4ab097757350",
+        "android_client_info": {
+          "package_name": "com.example.firebaseflutterconnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC46ewbxQrMDzF9DjTYzqKZyd2kIRtq5u0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
