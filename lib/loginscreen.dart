@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:firebaseflutterconnect/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'homescreen.dart';
 import 'signupscreen.dart';
@@ -8,6 +11,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _auth = AuthService();
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -89,11 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // Implement login logic
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
-                      );
+                      _login();
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -126,5 +127,26 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  goToHome(BuildContext context) => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+
+  _login() async {
+    final user = await _auth.loginUserWithEmailAndPassword(
+        _emailController.text, _passwordController.text);
+    if (user != null) {
+      log("User Login Success");
+      goToHome(context);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Invalid Credentials'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 }

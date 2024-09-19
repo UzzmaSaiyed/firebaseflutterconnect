@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:firebaseflutterconnect/auth_service.dart';
+import 'package:firebaseflutterconnect/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'loginscreen.dart';
 
@@ -7,6 +11,8 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  final _auth = AuthService();
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -88,11 +94,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // Implement signup logic
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
-                      );
+                      _signup();
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -125,5 +127,35 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       ),
     );
+  }
+
+  goToHome(BuildContext context) => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+
+  _signup() async {
+    try {
+      final user = await _auth.createUserWithEmailAndPassword(
+          _emailController.text, _passwordController.text);
+      if (user != null) {
+        log("User Created Successfully");
+        goToHome(context);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Something went wrong!!!'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Something went wrong!!!'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 }
