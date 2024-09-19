@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:firebaseflutterconnect/auth_service.dart';
-import 'package:firebaseflutterconnect/homescreen.dart';
+import 'package:firebaseflutterconnect/productcrud.dart';
 import 'package:flutter/material.dart';
 import 'loginscreen.dart';
 
@@ -129,9 +129,9 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
-  goToHome(BuildContext context) => Navigator.push(
+  goToHome(BuildContext context) => Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
+        MaterialPageRoute(builder: (context) => ProductCRUD()),
       );
 
   _signup() async {

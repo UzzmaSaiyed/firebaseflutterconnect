@@ -147,7 +147,7 @@ class _ProductCRUDState extends State<ProductCRUD> {
         child: Scaffold(
           backgroundColor: Colors.grey[200],
           appBar: AppBar(
-            backgroundColor: const Color.fromARGB(255, 200, 132, 132),
+            backgroundColor: Colors.blueAccent,
             title: Text('Product CRUD'),
             actions: [
               IconButton(
